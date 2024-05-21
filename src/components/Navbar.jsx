@@ -18,13 +18,16 @@ function Header({
   // Fetch tasks from the server when the component mounts
   useEffect(() => {
     fetchTasks();
-  }, [isAuthenticated]);
+  }, []);
 
   // Fetch tasks from the server
   const fetchTasks = async () => {
     try {
+      const token = localStorage.getItem('token');
+      console.log(token)
       const response = await axios.get(
-        "http://localhost:4000/api/v1/task/mytask",
+        "https://capstone-backend-lpvl.onrender.com/api/v1/task/mytask",{headers: { Authorization: `Bearer ${token}` }},
+        //"https://capstone-backend-lpvl.onrender.com",
         { withCredentials: true }
       );
       setAllTasks(response.data.tasks);
@@ -36,8 +39,10 @@ function Header({
 
   const handleLogout = async () => {
     try {
+      const token = localStorage.getItem('token');
       const { data } = await axios.get(
-        "http://localhost:4000/api/v1/user/logout",
+        "https://capstone-backend-lpvl.onrender.com/api/v1/user/logout",{headers: { Authorization: `Bearer ${token}` } },
+       // "https://capstone-backend-lpvl.onrender.com",
         { withCredentials: "true" }
       );
       toast.success(data.message);

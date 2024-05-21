@@ -12,9 +12,11 @@ const CreateTaskModal = ({
   const [description, setDescription] = useState("");
 
   const handleCreateTask = async () => {
+    const token = localStorage.getItem('token');
     await axios
       .post(
-        "http://localhost:4000/api/v1/task/post",
+        "https://capstone-backend-lpvl.onrender.com/api/v1/task/post",{headers: { Authorization: `Bearer ${token}` } },
+      // "https://capstone-backend-lpvl.onrender.com",
         { title, description },
         {
           withCredentials: true,

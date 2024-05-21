@@ -26,8 +26,10 @@ function Register({ isAuthenticated, setIsAuthenticated }) {
     formData.append("phone", phone);
     formData.append("password", password);
     formData.append("avatar", avatar);
+    const token = localStorage.getItem('token');
     await axios
-      .post("http://localhost:4000/api/v1/user/register", formData, {
+      .post("https://capstone-backend-lpvl.onrender.com/api/v1/user/register",{headers: { Authorization: `Bearer ${token}` } },
+       formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })

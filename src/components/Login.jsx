@@ -12,9 +12,11 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    
     axios
       .post(
-        "http://localhost:4000/api/v1/user/login",
+        "https://capstone-backend-lpvl.onrender.com/api/v1/user/login",
+       //"https://capstone-backend-lpvl.onrender.com",
         { email, password },
         {
           withCredentials: true,
@@ -22,6 +24,9 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
         }
       )
       .then((res) => {
+        const { token } = res.data;
+                localStorage.setItem('token', token);
+                console.log(token)
         setEmail("");
         setPassword("");
         setIsAuthenticated(true);

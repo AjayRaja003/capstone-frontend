@@ -16,8 +16,10 @@ const App = () => {
   useEffect(() => {
     const handleGetUser = async () => {
       try {
+        const token = localStorage.getItem('token');
         const { data } = await axios.get(
-          "http://localhost:4000/api/v1/user/me",
+          "https://capstone-backend-lpvl.onrender.com/api/v1/user/me",{headers: { Authorization: `Bearer ${token}` }},
+          //"https://capstone-backend-lpvl.onrender.com",
           { withCredentials: true }
         );
         setIsAuthenticated(true);
@@ -29,7 +31,7 @@ const App = () => {
       }
     };
     handleGetUser();
-  }, [isAuthenticated]);
+  }, []);
 
   return (
     <>

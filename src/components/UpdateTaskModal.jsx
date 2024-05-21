@@ -16,8 +16,11 @@ const UpdateTaskModal = ({
 
   useEffect(() => {
     const getSingleTask = async () => {
+      const token = localStorage.getItem('token');
       await axios
-        .get(`http://localhost:4000/api/v1/task/single/${id}`, {
+        .get(`https://capstone-backend-lpvl.onrender.com/api/v1/task/single/${id}`, {headers: { Authorization: `Bearer ${token}` } },
+        //`https://capstone-backend-lpvl.onrender.com`,
+        {
           withCredentials: true,
         })
         .then((res) => {
@@ -36,9 +39,11 @@ const UpdateTaskModal = ({
   }, [id]);
 
   const handleUpdateTask = async () => {
+    const token = localStorage.getItem('token');
     await axios
       .put(
-        `http://localhost:4000/api/v1/task/update/${id}`,
+        `https://capstone-backend-lpvl.onrender.com/api/v1/task/update/${id}`,{headers: { Authorization: `Bearer ${token}` } },
+       //`https://capstone-backend-lpvl.onrender.com`,
         {
           title,
           description,
