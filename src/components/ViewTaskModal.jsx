@@ -7,11 +7,8 @@ const ViewTaskModal = ({ showViewModal, handleViewModalClose, id }) => {
   const [task, setTask] = useState([]);
   useEffect(() => {
     const getSingleTask = async () => {
-      const token = localStorage.getItem('token');
       await axios
-        .get(`https://capstone-backend-lpvl.onrender.com/api/v1/task/single/${id}`,{headers: { Authorization: `Bearer ${token}` } },
-        //`https://capstone-backend-lpvl.onrender.com`,
-        {
+        .get(`http://localhost:4000/api/v1/task/single/${id}`, {
           withCredentials: true,
         })
         .then((res) => {

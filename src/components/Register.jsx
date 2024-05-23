@@ -26,10 +26,8 @@ function Register({ isAuthenticated, setIsAuthenticated }) {
     formData.append("phone", phone);
     formData.append("password", password);
     formData.append("avatar", avatar);
-    const token = localStorage.getItem('token');
     await axios
-      .post("https://capstone-backend-lpvl.onrender.com/api/v1/user/register",{headers: { Authorization: `Bearer ${token}` } },
-       formData, {
+      .post("http://localhost:4000/api/v1/user/register", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
       })
@@ -43,7 +41,6 @@ function Register({ isAuthenticated, setIsAuthenticated }) {
         toast.success(res.data.message);
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error.response.data.message);
       });
   };

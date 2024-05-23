@@ -17,9 +17,9 @@ const Home = ({ isAuthenticated, tasks, setTasks, taskTitle }) => {
   const [updatedTaskId, setUpdateTaskId] = useState(null);
 
   const deleteTask = async (id) => {
-    const token = localStorage.getItem('token');
+    
     await axios
-      .delete(`https://capstone-backend-lpvl.onrender.com/api/v1/task/delete/${id}`,{headers: { Authorization: `Bearer ${token}` } },
+      .delete(`http://localhost:4000/api/v1/task/delete/${id}`,
       //`https://capstone-backend-lpvl.onrender.com` ,
       {
         withCredentials: true,
