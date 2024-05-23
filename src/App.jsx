@@ -8,7 +8,7 @@ import axios from "axios";
 import Login from "./components/Login";
 import Profile from "./components/Profile";
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(localStorage.getItem("token"));
   const [tasks, setTasks] = useState([]);
   const [user, setUser] = useState({});
   const [taskTitle, setTaskTitle] = useState("Tasks");
@@ -17,7 +17,7 @@ const App = () => {
     const handleGetUser = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:4000/api/v1/user/me",
+          "https://capstone-backend-lpvl.onrender.com/api/v1/user/me",
           { withCredentials: true }
         );
         setIsAuthenticated(true);
