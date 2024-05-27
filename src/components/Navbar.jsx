@@ -36,11 +36,9 @@ function Header({
 
   const handleLogout = async () => {
     try {
-      const { data } = await axios.get(
-        "https://capstone-backend-lpvl.onrender.com/api/v1/user/logout",
-        { withCredentials: "true" }
-      );
-      toast.success(data.message);
+     localStorage.removeItem("token")
+      
+      toast.success("logged out");
       setIsAuthenticated(false);
     } catch (error) {
       toast.error(error.response.data.message);

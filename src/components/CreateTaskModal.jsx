@@ -12,15 +12,16 @@ const CreateTaskModal = ({
   const [description, setDescription] = useState("");
 
   const handleCreateTask = async () => {
-    
+    const token=localStorage.getItem("token")
     await axios
       .post(
         "https://capstone-backend-lpvl.onrender.com/api/v1/task/post",
       // "https://capstone-backend-lpvl.onrender.com",
         { title, description },
         {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
+          // withCredentials: true,
+          headers: { "Content-Type": "application/json",Authorization: `Bearer ${token}` },
+         
         }
       )
       .then((res) => {

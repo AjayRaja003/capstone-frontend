@@ -17,19 +17,21 @@ const Home = ({ isAuthenticated, tasks, setTasks, taskTitle }) => {
   const [updatedTaskId, setUpdateTaskId] = useState(null);
 
   const deleteTask = async (id) => {
-    
+    const token=localStorage.getItem("token")
     await axios
       .delete(`https://capstone-backend-lpvl.onrender.com/api/v1/task/delete/${id}`,
       //`https://capstone-backend-lpvl.onrender.com` ,
       {
-        withCredentials: true,
+        // withCredentials: true,
+        headers:{Authorization: `Bearer ${token}`}
       })
       .then((res) => {
         toast.success(res.data.message);
         setTasks((prevTasks) => prevTasks.filter((tasks) => tasks._id !== id));
       })
       .catch((error) => {
-        toast.error(error.response.data.message);
+        toast.error(error.message);
+        console.log(error)
       });
   };
 

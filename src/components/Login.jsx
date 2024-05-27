@@ -15,18 +15,19 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
     
     axios
       .post(
-        "https://capstone-backend-lpvl.onrender.com/api/v1/user/login",
+        "http://localhost:4000/api/v1/user/login",
        //"https://capstone-backend-lpvl.onrender.com",
         { email, password },
         {
-          withCredentials: true,
+          // withCredentials: true,
           headers: { "Content-Type": "application/json" },
         }
       )
       .then((res) => {
+        console.log(res.data);
         const { token } = res.data;
                 localStorage.setItem('token', token);
-                console.log(token)
+                
         setEmail("");
         setPassword("");
         setIsAuthenticated(true);
@@ -34,7 +35,7 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
       })
       .catch((error) => {
         console.log(error);
-        toast.error(error.response.data.message);
+        toast.error(error.message);
       });
   };
   if (isAuthenticated) {

@@ -13,29 +13,38 @@ const UpdateTaskModal = ({
   const [description, setDescription] = useState("");
   const [status, setStatus] = useState("incomplete");
   const [archived, setArchived] = useState(false);
-
+  
   useEffect(() => {
     const getSingleTask = async () => {
+      const token =localStorage.getItem("token")
+      console.log(id)
       await axios
-        .get(`https://capstone-backend-lpvl.onrender.com/api/v1/task/single/${id}`, {
-          withCredentials: true,
+        .get(`https://capstone-backend-lpvl.onrender.com/api/v1/task/single/${id}`,   {
+          headers: {
+            Authorization: `Bearer ${token}`
+          },//withCredentials: true
         })
         .then((res) => {
+                
           setTitle(res.data.task.title);
           setDescription(res.data.task.description);
           setStatus(res.data.task.status);
           setArchived(res.data.task.archived);
         })
         .catch((error) => {
-          console.log(error.response.data.message);
+          console.log(error.message);
+          console.log(error)
         });
     };
     if (id) {
+      console.log(id);
       getSingleTask();
     }
   }, [id]);
 
   const handleUpdateTask = async () => {
+    const token =localStorage.getItem("token")
+    console.log(token);
     await axios
       .put(
         `https://capstone-backend-lpvl.onrender.com/api/v1/task/update/${id}`,
@@ -46,7 +55,10 @@ const UpdateTaskModal = ({
           archived,
         },
         {
-          withCredentials: true,
+          //withCredentials: true,
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
         }
       )
       .then((res) => {

@@ -14,16 +14,23 @@ const App = () => {
   const [taskTitle, setTaskTitle] = useState("Tasks");
 
   useEffect(() => {
+    
     const handleGetUser = async () => {
       try {
+        const token = localStorage.getItem("token");
         const { data } = await axios.get(
           "https://capstone-backend-lpvl.onrender.com/api/v1/user/me",
-          { withCredentials: true }
+          {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
         );
         setIsAuthenticated(true);
         setUser(data.user);
       } catch (error) {
         console.log("USER IS NOT AUTHENTICATED!");
+        console.log(error);
         setIsAuthenticated(false);
         setUser({});
       }
