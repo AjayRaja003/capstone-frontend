@@ -17,7 +17,6 @@ const UpdateTaskModal = ({
   useEffect(() => {
     const getSingleTask = async () => {
       const token =localStorage.getItem("token")
-      console.log(id)
       await axios
         .get(`https://capstone-backend-lpvl.onrender.com/api/v1/task/single/${id}`,   {
           headers: {
