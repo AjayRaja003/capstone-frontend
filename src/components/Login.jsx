@@ -24,7 +24,6 @@ function Login({ isAuthenticated, setIsAuthenticated }) {
         }
       )
       .then((res) => {
-        console.log(res.data);
         const { token } = res.data;
                 localStorage.setItem('token', token);
                 

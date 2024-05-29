@@ -23,9 +23,10 @@ function Header({
   // Fetch tasks from the server
   const fetchTasks = async () => {
     try {
+      const token=localStorage.getItem("token")
       const response = await axios.get(
-        "https://capstone-backend-lpvl.onrender.com/api/v1/task/mytask",
-        { withCredentials: true }
+        "https://capstone-backend-lpvl.onrender.com/api/v1/task/mytask",{headers:{Authorization: `Bearer ${token}`}},
+        { /*withCredentials: true */}
       );
       setAllTasks(response.data.tasks);
       setTasks(response.data.tasks); // Update tasks with fetched tasks
